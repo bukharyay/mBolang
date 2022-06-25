@@ -1,0 +1,28 @@
+<IfModule authz_core_module>
+RewriteEngine On
+RewriteCond %{REQUEST_URI} ^system.*
+RewriteCond $1 !^(index\.php|images|js|uploads|css|robots\.txt)
+RewriteRule ^(.*)$ /index.php/$1 [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php/$1 [L] 
+
+<Files ~ ".(xml|css|jpe?g|png|gif|js)$">
+    #order allow,deny
+    #deny from all
+</Files>
+
+<files .htaccess="">
+	order allow,deny
+	deny from all
+</files>
+
+<Files ~ "^.*\.([Hh][Tt][Aa])">
+    order allow,deny
+    deny from all
+    satisfy all
+</Files>
+
+#directory browsing
+Options All -Indexes
+</IfModule>
